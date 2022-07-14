@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to polls app</h1>
+    <h3>Cast your votes by selecting any question</h3>
+    {% if question_list %}
+        {% for q in question_list %}
+            <h2><a href = "{% url 'polls:detail' q.pk %}" style="text-decoration: none">{{ forloop.counter }}. {{q.question_text}}</a></p></h2>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>

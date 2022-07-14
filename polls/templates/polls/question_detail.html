@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'polls:vote' question.id %}", method="post">
+        {% csrf_token %}
+        {% if question %}
+            <h1>{{question.question_text|upper}}</h1>
+            {% if error_message %}
+            <h3 style="color: #FF7E0D"><strong>{{error_message}}</strong></h3>
+            {% endif %}
+            <h2>Choose any below option to vote</h2>
+            {% for choice in question.choice_set.all %}
+            <h3><input type="radio" value = {{choice.pk}} name="selected" id = "ctxt{{forloop.counter}}">
+            <label for="{{forloop.counter}}">{{choice.choice_text|upper}}</label></h3>
+            {% endfor %}
+            <input type="submit" value="Vote">
+        {% endif %}
+    </form>
+</body>
+</html>
+
